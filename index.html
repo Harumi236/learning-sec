@@ -6,6 +6,29 @@
 </head>
 <body>
   <h1>Hola Mundo</h1>
-  <img src="https://chl-dda174f0-12e4-4c75-a34b-eeff992b3026-imagen-importante.softwareseguro.com.ar/profile-pic" alt="Imagen de prueba">
+  <img id="myImg" 
+       src="https://chl-dda174f0-12e4-4c75-a34b-eeff992b3026-imagen-importante.softwareseguro.com.ar/profile-pic" 
+       alt="PFP">
+
+  <script>
+    const img = document.getElementById("myImg");
+    img.onload = function() {
+      const width = img.naturalWidth;
+      const height = img.naturalHeight;
+      console.log("Image loaded:", width + "x" + height);
+
+      // Here you would send the data to your backend
+      sendDimensions(width, height);
+    };
+
+    function sendDimensions(w, h) {
+      // Example: POST to your server
+      fetch("https://your-server.com/collect", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ width: w, height: h })
+      });
+    }
+  </script>
 </body>
 </html>
